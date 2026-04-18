@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import React from 'react'
 import { ChevronDown, FilesIcon, GraduationCap, LayoutDashboard, StarsIcon, PenIcon } from "lucide-react";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuGroup, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator,  } from "./ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "./ui/dropdown-menu";
 import { checkUser } from "@/lib/checkUser";
 
 
@@ -14,12 +14,10 @@ const Header = async () => {
   const { userId } = await auth();
   const isSignedIn = Boolean(userId);
 
-  if (isSignedIn) {
-    await checkUser();
-  }
+  await checkUser();
 
   return (
-    <header className="fixed top-0 w-full border-b bg-background/80 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 w-full border-b bg-background z-50">
       <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
       <Link href="/">
         <Image

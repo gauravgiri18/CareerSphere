@@ -10,16 +10,14 @@ const isProtectedRoutes = createRouteMatcher([
 ])
 
 export default clerkMiddleware(async (auth, req) => {
-  const { userId } = await auth();
+  const { userId, redirectToSignIn } = await auth();
 
-  if(!userId && isProtectedRoutes(req)){
-    const {redirectToSignIn} = await auth();
+  if (!userId && isProtectedRoutes(req)) {
     return redirectToSignIn();
   }
 
   return NextResponse.next();
 });
-
 export const config = {
   matcher: [
     // Skip Next.js internals and all static files, unless found in search params
